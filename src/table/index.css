@@ -1,0 +1,70 @@
+.sticky-table {
+  width: 600px;
+  height: 300px;
+  overflow: auto;
+}
+
+table {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: solid 1px lightgray;
+  border-bottom: none;
+  border-right: none;
+}
+
+td, th {
+  min-width: 150px;
+  box-sizing: border-box;
+  border-right: solid 1px lightgray;
+  border-bottom: solid 1px lightgray;
+}
+
+td.row-sticky {
+  position: sticky;
+  background: white;
+  z-index: 2;
+}
+
+th.row-sticky {
+  z-index: 4;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 3;
+}
+
+.th-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.sorter-wrapper {
+  display: flex;
+  flex-flow: column;
+}
+
+.sorter-wrapper span:first-child,
+.sorter-wrapper span:nth-child(2) {
+  transform-origin: center center;
+  transform: rotate(90deg);
+  color: lightgray;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.sorter-wrapper span.active {
+  color: blue;
+}
+
+.pagination input {
+  width: 40px;
+}
+
+.pagination .clickable {
+  cursor: pointer;
+}
