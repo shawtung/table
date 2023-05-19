@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 
 export const useSorter = () => {
   const [sorter, setSorter] = useState(0)
@@ -35,7 +35,7 @@ export const usePagination = (dataSourceLength: number) => {
 
   const onPageNumberChange = useCallback(
     (page: number) => {
-      if (page <= 0) setPageNumber(0)
+      if (page <= 1) setPageNumber(1)
       else if (page >= total) setPageNumber(total)
       else setPageNumber(page)
     },
@@ -47,8 +47,14 @@ export const usePagination = (dataSourceLength: number) => {
   }, [total])
 
   const onPageNumberDecrease = useCallback(() => {
-    setPageNumber((prev) => (prev <= 0 ? 0 : prev - 1))
+    setPageNumber((prev) => (prev <= 1 ? 1 : prev - 1))
   }, [])
+
+  useEffect(() => {
+    if (pageNumber > total) {
+      setPageNumber(total)
+    }
+  }, [pageNumber, total])
 
   return {
     pageSize: oPageSize,

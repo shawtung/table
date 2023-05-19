@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react'
 import { useSorter, usePagination, PageSizeList } from './hooks'
 import './index.css'
 
-interface Props {
+export interface Props {
   columns: string[]
   dataSource: (string | number)[][]
   /** positive value represents left and negative right */
@@ -107,7 +107,10 @@ export const Table: React.FC<Props> = (props) => {
         </table>
       </div>
       <div className='pagination'>
-        <span className='clickable' onClick={onPageNumberDecrease}>
+        <span
+          className={`clickable ${pageNumber <= 1 && 'disabled'}`}
+          onClick={onPageNumberDecrease}
+        >
           &lt;
         </span>
         &nbsp;
@@ -115,16 +118,19 @@ export const Table: React.FC<Props> = (props) => {
           <input
             type='number'
             value={pageNumber}
-            onInput={(e) => onPageNumberChange((e.target as any).value)}
+            onChange={(e) => onPageNumberChange((e.target as any).value)}
           />
           &nbsp;/&nbsp;
           {total}
         </span>
         &nbsp;
-        <span className='clickable' onClick={onPageNumberIncrease}>
+        <span
+          className={`clickable ${pageNumber >= total && 'disabled'}`}
+          onClick={onPageNumberIncrease}
+        >
           &gt;
         </span>
-        &nbsp;
+        &nbsp;&nbsp;
         <select
           value={pageSize}
           onChange={(e) =>
@@ -137,6 +143,7 @@ export const Table: React.FC<Props> = (props) => {
             <option key={v}>{v}</option>
           ))}
         </select>
+        &nbsp;items per page
       </div>
     </div>
   )

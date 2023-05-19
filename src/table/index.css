@@ -1,6 +1,6 @@
 .sticky-table {
   width: 600px;
-  height: 300px;
+  height: 200px;
   overflow: auto;
 }
 
@@ -61,10 +61,25 @@ th {
   color: blue;
 }
 
+.pagination {
+  margin-top: 4px;
+  user-select: none;
+}
+
 .pagination input {
   width: 40px;
+  font-size: 12px;
+}
+
+.pagination select {
+  height: 20px
 }
 
 .pagination .clickable {
   cursor: pointer;
+}
+
+.pagination .clickable.disabled {
+  cursor: not-allowed;
+  color: lightgray;
 }

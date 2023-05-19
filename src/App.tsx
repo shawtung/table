@@ -1,6 +1,8 @@
+import { useCallback, useState } from 'react'
 import { Table } from './table'
+import './App.css'
 
-const DemoTableData = {
+window.DemoTableProps = {
   columns: ['name', 'score1', 'score2', 'score3', 'score4', 'score5', 'score6'],
   dataSource: [
     ['A1', 3, 4, 3, 4, 3, 4],
@@ -22,14 +24,27 @@ const DemoTableData = {
     ['H2', 4, 2, 4, 2, 4, 2],
     ['I2', 2, 1, 2, 1, 2, 1],
   ],
+  freeze: -2,
 }
 
 function App() {
+  const forceUpdate = useForceUpdate()
+
   return (
-    <div>
-      <Table {...DemoTableData} freeze={-3} />
+    <div className='demo-wrapper'>
+      <p>
+        Modify <code>window.DemoTableProps</code> in console and click{' '}
+        <code>refresh</code>.&nbsp;
+        <button onClick={forceUpdate}>refresh</button>
+      </p>
+      <Table {...window.DemoTableProps} />
     </div>
   )
 }
 
 export default App
+
+const useForceUpdate = () => {
+  const [, setState] = useState(false)
+  return useCallback(() => setState((p) => !p), [])
+}
